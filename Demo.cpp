@@ -52,6 +52,7 @@ int main()
         catan.chooseFirstRes(cp);
 
         // The second player's turn
+        cout<<"Ending turn"<<endl;
         catan.endTurn(cp);
     }
     // The game has started

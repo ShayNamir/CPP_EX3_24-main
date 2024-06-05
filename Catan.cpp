@@ -466,8 +466,8 @@ namespace ariel{
     }
 
     void Catan::chooseFirstRes(int playerNum){
-        if(players[playerNum]->getPoints()>1)
-            throw std::invalid_argument("Not the first turn");
+        //if(players[playerNum-1]->getPoints()>1)
+            //throw std::invalid_argument("Not the first turn");
         
         //board.chooseFirstRes(playerNum);
         string print="";
@@ -481,13 +481,13 @@ namespace ariel{
                 count++;
             }
         }
-        cout << "Player " << players[playerNum]->getName() << ", please choose 2 resources to collect: (n1 n2)" << endl
+        cout << "Player " << players[playerNum-1]->getName() << ", please choose 2 resources to collect: (n1 n2)" << endl
              << print;
         int res, res2;
         cin >> res >> res2;
         //Assuming the player will enter valid numbers
-        players[playerNum]->addResource(option[res-1][1],1);//Add the resource
-        players[playerNum]->addResource(option[res2-1][1],1);//Add the resource
+        players[playerNum-1]->addResource(option[res-1][1],1);//Add the resource
+        players[playerNum-1]->addResource(option[res2-1][1],1);//Add the resource
         //cout<< "Player " << players[playerNum]->getName() << " has collected 1 " << getBoard().getLand(option[res-1][0]).getResourceName()<<endl;
 
     }
