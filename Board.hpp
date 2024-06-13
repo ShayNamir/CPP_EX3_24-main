@@ -20,6 +20,7 @@ namespace ariel {
     class Board {
     private:
         Land lands[BOARD_SIZE];
+        
         // Helper function to generate a random board
         static std::vector<Land> generateRandomBoard();
         // Helper function to close adding 0-5
@@ -28,6 +29,7 @@ namespace ariel {
     public:
         // Constructor
         Board(bool isTest=false);
+        ~Board();
         Land getLand(int index) const;
 
         bool isPlaceTaken(bool isRoad,int landIndex, int spotIndex);

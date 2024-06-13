@@ -8,6 +8,8 @@ Mail: ShayNamir@gmail.com
 #include <ctime>
 #include <algorithm>
 #include <random>
+#include <iomanip>
+#include <sstream>
 
 
 namespace ariel {
@@ -56,6 +58,9 @@ namespace ariel {
             }
         }
         
+    }
+    Board::~Board(){
+        //delete[] lands;
     }
     int Board::closeAdding(int index, int add) const{
         int ans = index + add;
@@ -579,6 +584,106 @@ namespace ariel {
     }
 */
     void Board::printBoard(){
+        /*
+        const int rows[5] = {3, 4, 5, 4, 3};
+        int index = 0;
+
+        for (int row = 0; row < 5; ++row) {
+            if(rows[row]==3)
+                std::cout << "\t   ";
+            else if(rows[row]==4)
+                std::cout << "\t";
+            
+            if (row % 2 == 0) {
+                std::cout << "    ";
+            }
+
+            // Print the top of hexagons
+            for (int i = 0; i < rows[row]; ++i) {
+                std::cout << "  / \\  ";
+                if (i < rows[row] - 1) {
+                    std::cout << " ";
+                }
+            }
+            std::cout << std::endl;
+
+            if(rows[row]==3)
+                std::cout << "\t   ";
+            else if(rows[row]==4)
+                std::cout << "\t";
+            
+            if (row % 2 == 0) {
+                std::cout << "    ";
+            }
+
+            // Print the top middle part of hexagons
+            for (int i = 0; i < rows[row]; ++i) {
+                std::cout << " /   \\ ";
+                if (i < rows[row] - 1) {
+                    std::cout << " ";
+                }
+            }
+            std::cout << std::endl;
+
+            if(rows[row]==3)
+                std::cout << "\t   ";
+            else if(rows[row]==4)
+                std::cout << "\t";
+            
+            if (row % 2 == 0) {
+                std::cout << "    ";
+            }
+
+            // Print the middle part of hexagons (resource name)
+            for (int i = 0; i < rows[row]; ++i) {
+                std::cout << "|" << std::setw(6) << std::left << this->lands[index].getResourceName() << "|";
+                if (i < rows[row] - 1) {
+                    std::cout << " ";
+                }
+                index++;
+            }
+            std::cout << std::endl;
+
+            if(rows[row]==3)
+                std::cout << "\t   ";
+            else if(rows[row]==4)
+                std::cout << "\t";
+            
+            if (row % 2 == 0) {
+                std::cout << "    ";
+            }
+
+            index -= rows[row];
+
+            // Print the bottom middle part of hexagons (number)
+            for (int i = 0; i < rows[row]; ++i) {
+                std::cout << " \\ " << std::setw(2) << lands[index].getNumber() << " / ";
+                if (i < rows[row] - 1) {
+                    std::cout << " ";
+                }
+                index++;
+            }
+            std::cout << std::endl;
+
+            if(rows[row]==3)
+                std::cout << "\t   ";
+            else if(rows[row]==4)
+                std::cout << "\t";
+            
+            if (row % 2 == 0) {
+                std::cout << "    ";
+            }
+
+            // Print the bottom of hexagons
+            for (int i = 0; i < rows[row]; ++i) {
+                std::cout << "  \\/  ";
+                if (i < rows[row] - 1) {
+                    std::cout << " ";
+                }
+            }
+            std::cout << std::endl;
+        }
+        */
         for (int i = 0; i < BOARD_SIZE; ++i) {
             if(i==0||i==3||i==7||i==12||i==16)
                 cout << endl;
@@ -591,34 +696,19 @@ namespace ariel {
             this->lands[i].printLand();
         }
         cout<<endl;
+        
     }
     bool Board::isPlaceTaken(bool isRoad,int landIndex, int spotIndex){
         return lands[landIndex].isSpotTaken(isRoad,spotIndex);
     }
-/*
-    void Board::chooseFirstRes(int playerNum){
-        string print="";
-        int count=1;
-        vector<vector<int>> option;
-        for (int i = 0; i < BOARD_SIZE; ++i) {
-            if(lands[i].isSett(playerNum)){
-                print+=to_string(count);
-                print+=". "+lands[i].getResourceName()+"\n";
-                option.push_back({i,lands[i].getResource()});
-                count++;
-            }
-        }
-        cout << "Player " << p.getName() << ", please choose a resource to collect: " << endl
-             << print;
-        int res;
-        cin >> res;
-        if(res<1||res>count)
-            throw std::invalid_argument("Invalid resource number");
-        p.addResource(option[res-1][1],1);//Add the resource
-        cout<< "Player " << p.getName() << " has collected 1 " << lands[option[res-1][0]].getResourceName()<<endl;
-    }
-    */
     Land Board::getLand(int index) const{
         return lands[index];
     }
 }
+/*
+     __     __      __
+   /   \   /   \   /   \
+  |Wood | |Iron | |Brick|
+   \ 3 /   \ 8 /   \ 6 /
+     --     --      --
+*/

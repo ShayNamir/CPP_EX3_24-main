@@ -4,6 +4,8 @@ Mail: ShayNamir@gmail.com
 */
 #include "Land.hpp"
 #include <iostream>
+#include <iomanip>
+#include <sstream>
 namespace ariel{
     // Constructor
     Land::Land(){
@@ -186,6 +188,55 @@ namespace ariel{
     }
 */
     void Land::printLand(){
+        /*
+        std::string resource_name;
+        switch (this->resource) {
+            case WOOD:
+                resource_name = "Wood";
+                break;
+            case BRICK:
+                resource_name = "Brick";
+                break;
+            case SHEEP:
+                resource_name = "Sheep";
+                break;
+            case WHEAT:
+                resource_name = "Wheat";
+                break;
+            case IRON:
+                resource_name = "Iron";
+                break;
+            case DESERT:
+                resource_name = "Desert";
+                break;
+            default:
+                resource_name = "Unknown";
+                break;
+        }
+
+        // Hexagon representation
+        const std::string top = "  ____  ";
+        const std::string middle_top = " /      \\ ";
+        const std::string middle = "/        \\";
+        const std::string middle_bottom = "\\        /";
+        const std::string bottom = " \\____/ ";
+
+        // Center the resource and number inside the hexagon
+        std::string resource_display = resource_name.substr(0, 6); // Ensure resource fits in width
+        std::ostringstream oss;
+        oss << std::setw(2) << std::setfill(' ') << this->number;
+        std::string number_display = oss.str();
+
+        std::string resource_line = " /" + resource_display + "\\ ";
+        std::string number_line = "/  " + number_display + "  \\";
+        
+        // Print the hexagon with the resource and number
+        std::cout << top << std::endl;
+        std::cout << resource_line << std::endl;
+        std::cout << number_line << std::endl;
+        std::cout << middle_bottom << std::endl;
+        std::cout << bottom << std::endl;
+        */
         string resource;
         switch (this->resource)
         {
@@ -213,6 +264,7 @@ namespace ariel{
         }
         // Print the land
         std::cout << resource<<":"<<this->number<<" ";
+        
     }
 
     bool Land::isSett(int playerNum){

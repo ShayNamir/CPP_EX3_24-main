@@ -29,7 +29,11 @@ namespace ariel{
     }
     // Destructor
     Catan::~Catan() {
-    // Nothing to clean up, but we need a destructor for completeness
+        //cout << "Entering the Catan destructor" << endl;
+        // Delete the players
+        for (size_t i = 0; i < players.size(); i++) {
+            delete players[i];
+        }
     }
     void Catan::placeRoad(int playerNum, int landIndex, int spotIndex){
         
@@ -443,8 +447,8 @@ namespace ariel{
         this->turn = startingPlayer;
     }
     void Catan::printBoard(){
-    this->board.printBoard();
-}
+        this->board.printBoard();
+    }
     Player& Catan::getCurrentPlayer(){
         // Ensure that 'turn' is a valid index for the 'players' vector
         if (turn >= 1 && static_cast<size_t>(turn) <= players.size()) {
