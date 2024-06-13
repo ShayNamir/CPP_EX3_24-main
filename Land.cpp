@@ -268,6 +268,9 @@ namespace ariel{
     }
 
     bool Land::isSett(int playerNum){
+        /*
+        
+        */
         for(size_t i=0;i<6;i++){
             if(playerNum == settlementSpots[i].getOwner()&&settlementSpots[i].isCollectable()==false){
                 settlementSpots[i].collect();
