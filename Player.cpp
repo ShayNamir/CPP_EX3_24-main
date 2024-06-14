@@ -58,15 +58,13 @@ namespace ariel {
     // Remove resources from the player
     void Player::removeResource(int resourceType, int amount) {
         //cout<< "Enter removeResource"<<endl;
-        //cout<<name<<" has "<<resources[resourceType]<<" resources of type "<<resourceType<<endl;
         if (resourceType >= 0 && resourceType < 5) {
+            if(resources[resourceType] >= amount)
+                throw std::out_of_range("No enough resources");
             resources[resourceType] -= amount;
         }
-        else if(resources[resourceType] >= amount)
-            throw std::out_of_range("No enough resources");
         else
             throw std::out_of_range( "Invalid resource type 2");
-        //cout<<name<<" has "<<resources[resourceType]<<" resources of type "<<resourceType<<endl;
     }
 
     // Get the amount of a specific resource
