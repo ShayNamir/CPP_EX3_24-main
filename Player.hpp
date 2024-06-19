@@ -7,7 +7,7 @@ Mail: ShayNamir@gmail.com
 
 #include <string>
 #include <vector>
-#include "DevCard.hpp"
+
 using namespace std;
 
 namespace ariel {
@@ -21,7 +21,7 @@ namespace ariel {
         int playerNumber;
         int resources[5]; // Assuming 5 types of resources: WOOD, BRICK, SHEEP, WHEAT, IRON
         int points;
-        vector<DevCard> developmentCards;
+        vector<shared_ptr<DevCard>> developmentCards;
 
     public:
         // Constructor
@@ -43,9 +43,9 @@ namespace ariel {
         int getResource(int resourceType) const;
         int getResourcesCount() const;
         void rolledSeven();
-        void buyDevelopmentCard(DevCard& card);
+        void buyDevelopmentCard(shared_ptr<DevCard> card);
         void deleteDevCard(int index);
-        DevCard& getCardAt(int num);
+        shared_ptr<DevCard> getCardAt(int num);
         int useDevelopmentCard( int cardIndex);
         int getCardCount() const;
         int numOfNightOpened();

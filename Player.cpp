@@ -4,9 +4,11 @@ Mail: ShayNamir@gmail.com
 */
 #include "Player.hpp"
 #include "Catan.hpp"
-#include "DevCard.hpp"
 #include <iostream>
 #include <string>
+#include <vector>
+#include <stdexcept>
+
 
 using namespace std;
 namespace ariel {
@@ -25,7 +27,7 @@ namespace ariel {
         this->name = name;
         this->points = 0;
         this->playerNumber = ++playerCount;// The first player will have number 1
-        this->developmentCards = vector<DevCard>();
+        this->developmentCards = vector<shared_ptr<DevCard>>();
     }
 
     // Destructor
@@ -94,12 +96,11 @@ namespace ariel {
         this->printResources();
         cout << "You have more than 7 resources, you should discard half of them" << endl;
     }
-    void Player::buyDevelopmentCard(DevCard& card){
+    void Player::buyDevelopmentCard(shared_ptr<DevCard> card){
        // Add the card to the player's deck
         this->developmentCards.push_back(card);
-        //cout<<"Player "<<this->name<<" has bought a development card of type "<<card.getTypeName()<<endl;
     }
-    DevCard& Player::getCardAt(int num){
+    shared_ptr<DevCard> Player::getCardAt(int num){
         if(num >= 0 && num < this->getCardCount())
             return developmentCards[num];
         throw std::out_of_range ("Invalid card index");
@@ -117,17 +118,17 @@ namespace ariel {
     void Player::printDevelopmentCards(){
         cout << "Player " << this->name << " has the following development cards:" << endl;
         for (int i = 0; i < this->getCardCount(); ++i) {
-            string s = this->getCardAt(i).isUsed() ? "Yes" : "No";
-            cout << i << ".: " << this->getCardAt(i).getTypeName() << ", is used: " << s << endl;
+            string s = this->getCardAt(i)->isUsed() ? "Yes" : "No";
+            cout << i << ".: " << this->getCardAt(i)->getTypeName() << ", is used: " << s << endl;
         }
     }
-    int Player::useDevelopmentCard( int cardIndex){
+    int Player::useDevelopmentCard(int cardIndex){
         if(cardIndex >= 0 && cardIndex < this->getCardCount()){
-            DevCard& card = this->getCardAt(cardIndex);
-            if(card.isUsed())
+            shared_ptr<DevCard> card = this->getCardAt(cardIndex);
+            if(card->isUsed())
                 throw std::out_of_range("The card is already used");
-            int ans = card.useDevelopmentCard();
-            return ans;
+            card->useDevelopmentCard();
+            return card->getTypeName();
         }
         else
             throw std::out_of_range("Invalid card index");
@@ -135,7 +136,7 @@ namespace ariel {
     int Player::numOfNightOpened(){
         int count = 0;
         for (int i = 0; i < this->getCardCount(); ++i) {
-            if(this->getCardAt(i).getType() == KNIGHT&&this->getCardAt(i).isUsed())
+            if(this->getCardAt(i)->getTypeName() == KNIGHT&&this->getCardAt(i)->isUsed())
                 count++;
         }
         return count;

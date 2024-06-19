@@ -11,6 +11,14 @@ Mail: ShayNamir@gmail.com
 #include <iostream>
 #include <algorithm>
 #include <random>
+//incloding all the DevelopCards folder
+#include "DevelopCards/DevCard.hpp"
+#include "DevelopCards/KnightCard.hpp"
+#include "DevelopCards/MonopolyCard.hpp"
+#include "DevelopCards/RoadBuildingCard.hpp"
+#include "DevelopCards/VictoryPointCard.hpp"
+#include "DevelopCards/YearOfPlentyCard.hpp"
+
 namespace ariel{
     class Catan
     {
@@ -18,7 +26,7 @@ namespace ariel{
         vector<Player*> players;
         Board board;
         int turn;// 1: p1, 2: p2, 3: p3
-        vector<DevCard> deck;
+        vector<shared_ptr<DevCard>> deck;
 
         public:
         //Constructor

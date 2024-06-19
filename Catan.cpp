@@ -259,16 +259,18 @@ namespace ariel{
         if(isTest){
             // Clear the existing deck if any
             deck.clear();
-            deck.push_back(DevCard(KNIGHT));
-            deck.push_back(DevCard(KNIGHT));
-            deck.push_back(DevCard(KNIGHT));
-            deck.push_back(DevCard(VICTORY_POINT));
-            deck.push_back(DevCard(VICTORY_POINT));
-            deck.push_back(DevCard(VICTORY_POINT));
-            deck.push_back(DevCard(VICTORY_POINT));
-            deck.push_back(DevCard(ROAD_BUILDING));
-            deck.push_back(DevCard(MONOPOLY));
-            deck.push_back(DevCard(YEAR_OF_PLENTY));
+            //DevCard* card = new KnightCard();
+            deck.push_back(make_shared<KnightCard>());
+            deck.push_back(make_shared<KnightCard>());
+            deck.push_back(make_shared<KnightCard>());
+            deck.push_back(make_shared<VictoryPointCard>());
+            deck.push_back(make_shared<VictoryPointCard>());
+            deck.push_back(make_shared<VictoryPointCard>());
+            deck.push_back(make_shared<VictoryPointCard>());
+            deck.push_back(make_shared<RoadBuildingCard>());
+            deck.push_back(make_shared<MonopolyCard>());
+            deck.push_back(make_shared<YearOfPlentyCard>());
+            
             return;
         }
         // Clear the existing deck if any
@@ -276,18 +278,18 @@ namespace ariel{
 
         // 3 knights
         for (size_t i = 0; i < 3; i++) {
-            deck.push_back(DevCard(KNIGHT));
+            deck.push_back(make_shared<KnightCard>());
         }
         // 4 victory points
         for (size_t i = 0; i < 4; i++) {
-            deck.push_back(DevCard(VICTORY_POINT));
+            deck.push_back(make_shared<VictoryPointCard>());
         }
         // 1 road building
-        deck.push_back(DevCard(ROAD_BUILDING));
+        deck.push_back(make_shared<RoadBuildingCard>());
         // 1 monopoly
-        deck.push_back(DevCard(MONOPOLY));
+        deck.push_back(make_shared<MonopolyCard>());
         // 1 year of plenty
-        deck.push_back(DevCard(YEAR_OF_PLENTY));
+        deck.push_back(make_shared<YearOfPlentyCard>());
 
         // Shuffle the deck
         auto rng = std::default_random_engine(time(nullptr));
@@ -306,7 +308,7 @@ namespace ariel{
     if (deck.empty())
         throw std::out_of_range("No more development cards available in the deck");
     
-    DevCard card = deck.back();// Get the last card in the deck
+    shared_ptr<DevCard> card = deck.back();// Get the last card in the deck
     deck.pop_back();// Remove the card from the deck
 
     players[playerNum-1]->buyDevelopmentCard(card);// Add the card to the player's deck
@@ -328,10 +330,11 @@ namespace ariel{
         if (cardIndex < 0 || cardIndex >= players[playerNum-1]->getCardCount())
             throw std::invalid_argument("Invalid card index");
         
-        bool isUsed = players[playerNum-1]->getCardAt(cardIndex).isUsed();
+        bool isUsed = players[playerNum-1]->getCardAt(cardIndex)->isUsed();
         if (isUsed)
             throw std::invalid_argument("The card has already been used");
 
+        //DODO!!!
         // Use the card
         int type = players[playerNum-1]->useDevelopmentCard(cardIndex);
         if (type == KNIGHT) {
@@ -424,7 +427,7 @@ namespace ariel{
     void Catan::printDevelopmentCards(int playerNum){
     //Print in order
     for(int i=0;i<players[playerNum]->getCardCount();i++)
-        cout << "Card " << i << ": " << players[playerNum]->getCardAt(i).getType() << " Used: " << players[playerNum]->getCardAt(i).isUsed() << endl;
+        cout << "Card " << i << ": " << players[playerNum]->getCardAt(i)->getTypeName() << " Used: " << players[playerNum]->getCardAt(i)->isUsed() << endl;
     if(players[playerNum]->getCardCount()==0)
         cout << "You dont have a development cards" << endl;
 }
@@ -551,15 +554,15 @@ namespace ariel{
             throw std::invalid_argument("Invalid card index");
 
         //Check if one of the card is used
-        if (players[p1-1]->getCardAt(cardIndex1).isUsed() || players[p2-1]->getCardAt(cardIndex2).isUsed())
+        if (players[p1-1]->getCardAt(cardIndex1)->isUsed() || players[p2-1]->getCardAt(cardIndex2)->isUsed())
             throw std::invalid_argument("One of the cards is already used");
         
         // Trade the cards
-        DevCard card1 = players[p1-1]->getCardAt(cardIndex1);
-        DevCard card2 = players[p2-1]->getCardAt(cardIndex2);
+        shared_ptr<DevCard> card1 = players[p1-1]->getCardAt(cardIndex1);
+       shared_ptr<DevCard> card2 = players[p2-1]->getCardAt(cardIndex2);
         players[p1-1]->deleteDevCard(cardIndex1);
         players[p2-1]->deleteDevCard(cardIndex2);
-        cout<<"&&& card1: "<<card1.getTypeName()<<" card2: "<<card2.getTypeName()<<endl;
+        cout<<"&&& card1: "<<card1->getTypeName()<<" card2: "<<card2->getTypeName()<<endl;
         players[p1-1]->buyDevelopmentCard(card2);
         players[p2-1]->buyDevelopmentCard(card1);
 
