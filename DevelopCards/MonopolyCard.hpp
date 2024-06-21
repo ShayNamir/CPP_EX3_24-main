@@ -10,7 +10,8 @@ namespace ariel {
         MonopolyCard();
         ~MonopolyCard() override;
 
-        int getTypeName() const override;
+        std::string getTypeName() const override{ return "Monopoly";};
+        int getType() const override { return MONOPOLY; }
     };
 
 }

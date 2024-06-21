@@ -6,8 +6,4 @@ namespace ariel {
 
     RoadBuildingCard::~RoadBuildingCard() {}
 
-    int RoadBuildingCard::getTypeName() const {
-        return ROAD_BUILDING;
-    }
-
 }

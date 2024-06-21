@@ -10,7 +10,8 @@ namespace ariel {
         RoadBuildingCard();
         ~RoadBuildingCard() override;
 
-        int getTypeName() const override;
+        std::string getTypeName() const override{ return "Road Building";};
+        int getType() const override { return ROAD_BUILDING; }
     };
 
 }

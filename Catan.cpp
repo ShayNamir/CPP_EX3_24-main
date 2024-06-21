@@ -81,6 +81,7 @@ namespace ariel{
 
             // Print the updated board
             cout << players[playerNum-1]->getName()<<" placed settlement successfully (" << landIndex << ", " << spotIndex << ")" << endl;
+            cout<<"Woods: "<<players[playerNum-1]->getResource(WOOD)<<" Bricks: "<<players[playerNum-1]->getResource(BRICK)<<endl;
             return;
         }
         // Check if the player has enough resources

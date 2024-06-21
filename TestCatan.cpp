@@ -33,9 +33,11 @@ void createGame() {
         catan->placeSettlement(cp, land, spot);
         catan->addResource(catan->getTurn(), IRON, 1);
         land = 0; spot = 4;
+        cout<<"1:";
         CHECK_THROWS(catan->placeRoad(cp, land, spot)); // Try to place a road in a spot that is not connected to the settlement
         land = 0; spot = 5; // Assume the first road is at 0,5
         catan->placeRoad(cp, land, spot);
+        cout<<"2:";
 
         // The second settlement and road
         land = 1; spot = 1; // Assume the first settlement is at 1,1
@@ -111,11 +113,11 @@ TEST_CASE("Test Catan") {
         CHECK_EQ(p3->getResource(WOOD), 0);
         CHECK_EQ(p3->getResource(BRICK), 0);
         CHECK_EQ(p3->getResource(IRON), 0);
-        std::cout << "Check the resources collection of the first stage" << endl;
+        cout << "Check the resources collection of the first stage" << endl;
     }
 
     SUBCASE("Check the points collection of the first stage") {
-        //cout << "Enter points collection of the first stage" << endl;
+        cout << "Enter points collection of the first stage" << endl;
         // First player should have 2 points
         CHECK_EQ(catan->getPlayer(1).getPoints(), 2);
         // Second player should have 2 points
@@ -191,8 +193,10 @@ TEST_CASE("Test Catan") {
         CHECK_EQ(catan->getBoard().getLand(3).getSpot(true,0).isTakenBy(1), 1);
         
         catan->placeRoad(1, 3, 5); //(3,5)
-        CHECK_EQ(p1->getResource(BRICK), p1Brick-6);
-        CHECK_EQ(p1->getResource(WOOD), p1Wood-6);
+        p1Brick-=6;
+        p1Wood-=6;
+        CHECK_EQ(p1->getResource(BRICK), p1Brick);
+        CHECK_EQ(p1->getResource(WOOD), p1Wood);
         
 
         //CHECK_EQ(p1->getResource(BRICK), p1Brick-5);
@@ -205,7 +209,7 @@ TEST_CASE("Test Catan") {
         CHECK_THROWS(catan->placeRoad(2, 5, 0));// Not the turn of the player
         //he now have 14 woods and 16 bricks
         //check if he can build a road
-        catan->getPlayer(1).removeResource(WOOD, 14);
+        catan->getPlayer(1).removeResource(WOOD, p1Wood);// remove the resources
         CHECK_THROWS(catan->placeRoad(1, 1, 1));// not enough resources
         catan->getPlayer(1).addResource(WOOD, 14);// return the resources
         //cout<<"-After, p1 brick: "<<p1->getResource(BRICK)<<" p1 wood: "<<p1->getResource(WOOD)<<endl;

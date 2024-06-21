@@ -61,9 +61,10 @@ namespace ariel {
     void Player::removeResource(int resourceType, int amount) {
         //cout<< "Enter removeResource"<<endl;
         if (resourceType >= 0 && resourceType < 5) {
-            if(resources[resourceType] >= amount)
+            if(resources[resourceType] < amount)
                 throw std::out_of_range("No enough resources");
             resources[resourceType] -= amount;
+            cout<<name<<" has "<<resources[resourceType]<<" resources of type "<<resourceType<<endl;
         }
         else
             throw std::out_of_range( "Invalid resource type 2");
@@ -128,7 +129,7 @@ namespace ariel {
             if(card->isUsed())
                 throw std::out_of_range("The card is already used");
             card->useDevelopmentCard();
-            return card->getTypeName();
+            return card->getType();
         }
         else
             throw std::out_of_range("Invalid card index");
@@ -136,7 +137,7 @@ namespace ariel {
     int Player::numOfNightOpened(){
         int count = 0;
         for (int i = 0; i < this->getCardCount(); ++i) {
-            if(this->getCardAt(i)->getTypeName() == KNIGHT&&this->getCardAt(i)->isUsed())
+            if(this->getCardAt(i)->getType() == KNIGHT&&this->getCardAt(i)->isUsed())
                 count++;
         }
         return count;

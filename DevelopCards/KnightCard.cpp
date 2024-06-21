@@ -6,8 +6,4 @@ namespace ariel {
 
     KnightCard::~KnightCard() {}
 
-    int KnightCard::getTypeName() const {
-        return KNIGHT;
-    }
-
 }

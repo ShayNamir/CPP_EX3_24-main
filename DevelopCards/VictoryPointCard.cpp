@@ -6,8 +6,4 @@ namespace ariel {
 
     VictoryPointCard::~VictoryPointCard() {}
 
-    int VictoryPointCard::getTypeName() const {
-        return VICTORY_POINT;
-    }
-
 }

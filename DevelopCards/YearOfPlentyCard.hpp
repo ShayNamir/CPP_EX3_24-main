@@ -10,7 +10,8 @@ namespace ariel {
         YearOfPlentyCard();
         ~YearOfPlentyCard() override;
 
-        int getTypeName() const override;
+        std::string getTypeName() const override{ return "Year of Plenty";};
+        int getType() const override { return YEAR_OF_PLENTY; }
     };
 
 }

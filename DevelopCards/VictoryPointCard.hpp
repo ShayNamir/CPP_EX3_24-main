@@ -10,7 +10,8 @@ namespace ariel {
         VictoryPointCard();
         ~VictoryPointCard() override;
 
-        int getTypeName() const override;
+        std::string getTypeName() const override{ return "Victory Point";};
+        int getType() const override { return VICTORY_POINT; }
     };
 
 }

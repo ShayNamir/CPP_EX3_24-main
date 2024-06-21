@@ -22,7 +22,9 @@ namespace ariel {
         void useDevelopmentCard();
 
         // Pure virtual function to get the type name of the card
-        virtual int getTypeName()const = 0;
+        virtual std::string getTypeName()const = 0;
+        // Pure virtual function to get the type of the card
+        virtual int getType() const = 0;
     };
 
 }

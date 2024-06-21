@@ -9,7 +9,8 @@ namespace ariel {
         KnightCard();
         ~KnightCard() override;
 
-        int getTypeName() const override;
+        std::string getTypeName() const override{ return "Knight";};
+        int getType() const override { return KNIGHT; }
     };
 
 }

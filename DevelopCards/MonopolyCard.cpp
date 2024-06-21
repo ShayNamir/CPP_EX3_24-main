@@ -6,8 +6,4 @@ namespace ariel {
 
     MonopolyCard::~MonopolyCard() {}
 
-    int MonopolyCard::getTypeName() const {
-        return MONOPOLY;
-    }
-
 }
