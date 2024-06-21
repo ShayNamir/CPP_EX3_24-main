@@ -64,7 +64,7 @@ namespace ariel {
             if(resources[resourceType] < amount)
                 throw std::out_of_range("No enough resources");
             resources[resourceType] -= amount;
-            cout<<name<<" has "<<resources[resourceType]<<" resources of type "<<resourceType<<endl;
+            //cout<<name<<" has "<<resources[resourceType]<<" resources of type "<<resourceType<<endl;
         }
         else
             throw std::out_of_range( "Invalid resource type 2");

@@ -194,7 +194,7 @@ namespace ariel{
         // Change the turn
         //cout<<"Turn: "<<this->turn<<endl;
         this->turn = (this->turn % 3) + 1;
-        cout<<"-----Turn :"<<this->turn<<endl;
+        //cout<<"-----Turn :"<<this->turn<<endl;
         cout << "It's now " << this->players[this->turn - 1]->getName() << "'s turn" << endl;
         //cout<<"Turn: "<<this->turn<<endl;
         checkWinner(playerNum);
