@@ -177,6 +177,7 @@ int main()
                 cin >> index2;
                 catan.tradeDevCard(cp, p2, index,index2);
             }
+            } 
         }
         break;
         case 8:
@@ -185,7 +186,8 @@ int main()
             cout << "Please choose what to print: " << endl
                  << "1. Points" << endl
                  << "2. Board" << endl
-                 << "3. Development cards" << endl;
+                 << "3. Development cards" << endl
+                 << "4. Resources" << endl;
             cin >> input;
             switch (input)
             {
@@ -197,6 +199,9 @@ int main()
                 break;
             case 3:
                 catan.printDevelopmentCards(cp);
+                break;
+            case 4:
+                catan.getPlayer(cp).printResources();
                 break;
             default:
                 cout << "Invalid input" << endl;
@@ -217,5 +222,4 @@ int main()
     }
 
     return 0;
-    }   
-}
+}   
