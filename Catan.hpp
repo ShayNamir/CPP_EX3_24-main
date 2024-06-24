@@ -11,6 +11,7 @@ Mail: ShayNamir@gmail.com
 #include <iostream>
 #include <algorithm>
 #include <random>
+#include <memory>
 //incloding all the DevelopCards folder
 #include "DevelopCards/DevCard.hpp"
 #include "DevelopCards/KnightCard.hpp"
