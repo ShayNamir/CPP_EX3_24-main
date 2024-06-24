@@ -10,6 +10,8 @@ Mail: ShayNamir@gmail.com
 #include <random>
 #include <iomanip>
 #include <sstream>
+#include <chrono>
+#include <stdexcept>
 
 
 namespace ariel {
@@ -235,7 +237,7 @@ namespace ariel {
             }
 
             else if(spotIndex==4){
-                if(landIndex ==17|landIndex==18)
+                if(landIndex ==17||landIndex==18)
                     placeAround=lands[landIndex-1].getSpot(true,3).isAround(playerNum);
                 else if(landIndex==7)
                     placeAround=lands[landIndex+5].getSpot(true,5).isAround(playerNum);
